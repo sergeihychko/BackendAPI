@@ -13,7 +13,9 @@ on:
         required: false
 
 jobs:
-  call-workflow-passing-data:
+  update-todo:
+    permissions:
+      issues: write
     uses: EventAccess/Meta/.github/workflows/todo-to-issue.yaml@dev
     with:
       MANUAL_COMMIT_REF: ${{ inputs.MANUAL_COMMIT_REF }}
