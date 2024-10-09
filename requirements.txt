@@ -1,2 +1,2 @@
-Django==5.1.1
+Django==5.1.2
 django-urlconfchecks==0.11.0 # TODO: Add to CI
