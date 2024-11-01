@@ -1,8 +1,8 @@
 #!/bin/sh
 
-if [ "$DATABASE" = "postgres" ]; then
+if [ "$DJANGO_DATABASE_ENGINE" = "django.db.backends.postgresql" ]; then
     echo "Waiting for postgres..."
-    while ! nc -z $SQL_HOST $SQL_PORT; do
+    while ! nc -z $DJANGO_DATABASE_HOST "${DJANGO_DATABASE_PORT:-5432}"; do
         sleep 0.1
     done
 
