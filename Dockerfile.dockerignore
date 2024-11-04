@@ -1,4 +1,4 @@
 # Don't include react app in Django container
-/registration-app
+/registration-frontend-react
 
 .env
