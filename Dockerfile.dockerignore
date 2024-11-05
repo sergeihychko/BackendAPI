@@ -2,3 +2,8 @@
 /registration-frontend-react
 
 .env
+/docker-compose.yaml
+/compose.yaml
+/Dockerfile
+/Dockerfile.dockerignore
+/*.sqlite3

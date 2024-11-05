@@ -11,5 +11,7 @@ fi
 
 python manage.py migrate
 
+python manage.py check --deploy
+
 exec "$@"
 
