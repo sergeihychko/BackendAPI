@@ -30,14 +30,11 @@ COPY --from=collectstatic /static /srv/http/static
 
 FROM base AS dev
 ENV RUN_MODE=dev
-
-
-FROM base AS server
-ENV RUN_MODE=prod
-
 COPY ./entrypoint.sh .
-
-COPY . .
-
 ENTRYPOINT ["/app/entrypoint.sh"]
 
+
+FROM dev AS server
+ENV RUN_MODE=prod
+
+COPY . .
