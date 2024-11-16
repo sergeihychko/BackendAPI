@@ -1,6 +1,3 @@
-# Don't include react app in Django container
-/registration-frontend-react
-
 .env
 /docker-compose.yaml
 /compose.yaml

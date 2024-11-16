@@ -1,0 +1,9 @@
+-r requirements.txt
+
+black==24.10.0
+pytest==8.3.3
+mypy==1.13.0
+django-stubs[compatible-mypy]==5.1.1
+# TODO: Change djangorestframework-stubs to pypi release
+#   Django rest framework stubs does not yet have a mypy 1.13 compatible release
+djangorestframework-stubs[compatible-mypy] @ git+https://github.com/typeddjango/djangorestframework-stubs.git@93b4ffe1441f43a646138ad302144a849bc6ecc0
