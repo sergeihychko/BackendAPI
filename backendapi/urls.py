@@ -6,4 +6,5 @@ register_converter(converters.BinaryHexConverter, "hex")
 
 urlpatterns = [
     path("nfctag/<hex:tag>", views.scanned),
+    path("test", views.api_get, name="api_get"),
 ]

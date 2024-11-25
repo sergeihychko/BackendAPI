@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # ---
     "database",
     "backendapi",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
