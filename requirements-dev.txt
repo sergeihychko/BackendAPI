@@ -1,7 +1,7 @@
 -r requirements.txt
 
 black==24.10.0
-pytest==8.3.3
+pytest==8.3.4
 mypy==1.13.0
 django-stubs[compatible-mypy]==5.1.1
 # TODO: Change djangorestframework-stubs to pypi release
