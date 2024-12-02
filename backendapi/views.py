@@ -59,12 +59,6 @@ def create_attendant(request):
     return Response(
         {
             "message": "Attendant created successfully.",
-            "data": {
-                "ticket_id": attendant.ticket_id,
-                "nfc_id": b16encode(attendant.nfc_id),
-                "discord": "",
-                "is_crew": attendant.is_crew,
-                "is_valid": attendant.is_valid,
-            }
+            "id": attendant.id,
         }
     )
