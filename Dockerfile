@@ -21,7 +21,7 @@ COPY . .
 RUN DJANGO_STATIC_ROOT=/static python manage.py collectstatic --no-input
 RUN find /static -ls
 
-FROM ghcr.io/static-web-server/static-web-server:2.33.1 AS static-server
+FROM ghcr.io/static-web-server/static-web-server:2.34.0 AS static-server
 WORKDIR /srv/http
 ENV SERVER_ROOT=/srv/http
 
