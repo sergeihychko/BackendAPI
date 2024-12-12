@@ -2,7 +2,7 @@ name: Linting
 
 on:
   push:
-    branches: -dev
+    branches: [dev]
 
 jobs:
   lint:
