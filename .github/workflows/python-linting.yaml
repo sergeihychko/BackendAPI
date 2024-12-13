@@ -1,0 +1,86 @@
+name: Python
+on:
+  pull_request:
+  push:
+    branches:
+      - dev
+jobs:
+  python-mypy:
+    name: Mypy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4.2.2
+
+      - name: Set up Python
+        uses: actions/setup-python@v5.3.0
+        with:
+          python-version: 3.12
+          cache: 'pip'
+          cache-dependency-path: |
+            **/requirements.txt
+            **/requirements-*.txt
+      - name: Install reviewdog
+        uses: reviewdog/action-setup@v1.3.0
+        with:
+          reviewdog_version: latest
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Run MyPy
+        run: |
+          mypy --output=json \
+          | jq -Mac '{"message":(.message+"\n"+.hint),"location":{"path":.file,"range":{"start":{"line":.line,"column":.column}}},"severity":.severity|ascii_upcase,"code":{"url":"https://mypy.readthedocs.io/en/stable/error_code_list.html","value":.code}}' \
+          | reviewdog -f=rdjsonl -reporter=github-check -name mypy -fail-level warning -filter-mode nofilter
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  python-black:
+    name: Black
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4.2.2
+
+      - name: Set up Python
+        uses: actions/setup-python@v5.3.0
+        with:
+          python-version: 3.12
+          cache: 'pip'
+          cache-dependency-path: |
+            **/requirements.txt
+            **/requirements-*.txt
+      - name: Install reviewdog
+        uses: reviewdog/action-setup@v1.3.0
+        with:
+          reviewdog_version: latest
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Run Black
+        if: github.event_name == 'pull_request'
+        uses: reviewdog/action-black@v3.21.0
+        with:
+          reporter: github-pr-review
+          tool_name: black
+          level: warning
+          fail_on_error: true
+          filter_mode: nofilter
+
+      - name: Run Black
+        if: github.event_name == 'push'
+        uses: reviewdog/action-black@v3.21.0
+        with:
+          reporter: github-check
+          tool_name: black
+          level: warning
+          fail_on_error: true
+          filter_mode: nofilter
